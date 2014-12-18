@@ -3,6 +3,7 @@
 var path = require("path");
 var express = require("express");
 var pkg = require( path.join(__dirname, "package.json"));
+var bodyParser = require('body-parser');
 var target;
 
 if (process.argv[2]){
@@ -18,8 +19,13 @@ var app = express();
 app.use("/", express.static(path.join(__dirname, 'frontend')));
 
 app.get("/image", function(req,res) {
-  res.send(target);
+  res.json(target);
   console.log("target: " + target);
+});
+
+app.post("/converter", bodyParser.json(), function(req,res) {
+  console.log(req.body)
+  res.json("{message: 'you hit me!'}");
 });
 
 app.listen(port);

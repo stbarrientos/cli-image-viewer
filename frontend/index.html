@@ -2,41 +2,11 @@
 <html>
   <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/assets/javascripts/main.js"></script>
   </head>
   <body>
     <h2>CLI-Image-Viewer</h2>
     <p>See all of your favorite images from the internet without leaving the command line!</p>
     <canvas id="myCanvas" width="578" height="400"></canvas>
-    <script>
-      var imgSrc;
-      var canvas = document.getElementById('myCanvas');
-      var context = canvas.getContext('2d');
-      var imageObj = new Image();
-      var jsondataResource = JSON.stringify({message: 'hello world'});
-
-      $.ajax({
-        url: "/image",
-        method: "GET",
-        dataType: "json",
-        success: function(data){
-          imgSrc = data;
-          imageObj.onload = function() {
-            context.drawImage(imageObj, 50, 50);
-          };
-          imageObj.src = imgSrc;
-        }
-      });
-
-      $.ajax({
-        url: "/converter", 
-        dataType: "json", 
-        method: "POST",
-        contentType: "application/json",
-        data: jsondataResource, 
-        success: function(data){
-          console.log(data);
-        }
-      });
-    </script>
   </body>
 </html>

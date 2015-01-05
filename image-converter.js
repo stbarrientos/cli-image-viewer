@@ -48,13 +48,25 @@ if (!commander.url){
       // Show the user where the image was saved
       console.log("Image saved at " + imagePath);
 
+
       // Get pixel data from the saved image
       getPixels(imagePath, function(error, pixels){
         console.log("getPixels says:");
         if (error){
           console.log(error);
         } else {
-          console.log(pixels);
+      
+          // Get height and width of image
+          var height = pixels.shape.slice()[0];
+          var height = pixels.shape.slice()[1];
+          var heightRatio = height / 100;
+          var widthRatio = width / 100;
+
+          // Go through the data from the image`
+          console.log(pixels.data);
+          for (var i = 0; i < pixels.data.length; i += 3){
+            console.log(pixels.data[i] + ", " + pixels.data[i + 1] + ", " + pixels.data[i + 3]);
+          }
         }
       });
     }
